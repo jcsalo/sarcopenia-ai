@@ -4,7 +4,7 @@ Code for papers:
 
 Kanavati, F., Islam, S., Aboagye, E. O., & Rockall, A. (2018). Automatic L3 slice detection in 3D CT images using fully-convolutional networks. arXiv preprint arXiv:1811.09244.
 
-Kanavati, F., Islam, S., Arain, Z., Aboagye, E. O., & Rockall, A. (2020). 
+Kanavati, F., Islam, S., Arain, Z., Aboagye, E. O., & Rockall, A. (2020).
 Fully-automated deep learning slice-based muscle estimation from CT images for sarcopenia assessment. arXiv preprint arXiv:2006.06432.
 
 ### Models
@@ -34,8 +34,8 @@ or `make build`
 
 #### Slice detection trainer
 
-Download the training data from [here](https://imperialcollegelondon.box.com/s/0vt07mxy0re4zwao0sk76ywdt2s1pclm) 
-to your data folder. 
+Download the training data from [here](https://imperialcollegelondon.box.com/s/0vt07mxy0re4zwao0sk76ywdt2s1pclm)
+to your data folder.
 
 ```
 docker run --rm -it  -v <your_data_folder>:/data -v $(pwd)/configs:/configs sarcopeniaai python -m sarcopenia_ai.apps.slice_detection.trainer --config /configs/slice_detection.cfg
@@ -87,20 +87,20 @@ Expected result
 
 The dataset was collected from multiple sources:
 
- 1. 3 sets were obtained from [the Cancer Imaging Archive (TCIA)](http://www.cancerimagingarchive.net/): 
- 
-     - [head and neck](http://doi.org/10.7937/K9/TCIA.2017.umz8dv6s)
-     - [ovarian](http://dx.doi.org/10.7937/K9/TCIA.2016.NDO1MDFQ) 
-     - [colon](http://doi.org/10.7937/K9/TCIA.2015.NWTESAY1)
-       
- 2. a liver tumour dataset was obtained from the 
- [LiTS segmentation challenge](https://competitions.codalab.org/competitions/17094).
- 
+ 1. 3 sets were obtained from [the Cancer Imaging Archive (TCIA)](http://www.cancerimagingarchive.net/):
 
-The dataset is available for download in MIPs format from 
+     - [head and neck](http://doi.org/10.7937/K9/TCIA.2017.umz8dv6s)
+     - [ovarian](http://dx.doi.org/10.7937/K9/TCIA.2016.NDO1MDFQ)
+     - [colon](http://doi.org/10.7937/K9/TCIA.2015.NWTESAY1)
+
+ 2. a liver tumour dataset was obtained from the
+ [LiTS segmentation challenge](https://competitions.codalab.org/competitions/17094).
+
+
+The dataset is available for download in MIPs format from
 [here](https://imperialcollegelondon.box.com/s/0vt07mxy0re4zwao0sk76ywdt2s1pclm).
 
-The subset of transitional vertabrae cases can be downloaded from 
+The subset of transitional vertabrae cases can be downloaded from
 [here](https://imperialcollegelondon.box.com/s/mw7ysamajjcp1ot0721e6nl36xku0acv).
 
 
