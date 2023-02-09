@@ -4,7 +4,8 @@ import SimpleITK as sitk
 
 
 def load_image(image_path):
-    if image_path.endswith('.nii') or image_path.endswith('.nii.gz'):
+    ## Added or image_path.endswith('.dcm')
+    if image_path.endswith('.nii') or image_path.endswith('.nii.gz') or image_path.endswith('.dcm'):
         sitk_image = sitk.ReadImage(image_path)
 
     else:
