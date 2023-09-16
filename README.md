@@ -9,7 +9,7 @@ Fully-automated deep learning slice-based muscle estimation from CT images for s
 
 ## Python Helper Scripts
 
-[Python Scripts for DICOM reading](PHYTHON_SCRIPTS.md)
+[Python Scripts for DICOM reading](PYTHON_SCRIPTS.md)
 
 ### Models
 
