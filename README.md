@@ -7,6 +7,10 @@ Kanavati, F., Islam, S., Aboagye, E. O., & Rockall, A. (2018). Automatic L3 slic
 Kanavati, F., Islam, S., Arain, Z., Aboagye, E. O., & Rockall, A. (2020).
 Fully-automated deep learning slice-based muscle estimation from CT images for sarcopenia assessment. arXiv preprint arXiv:2006.06432.
 
+## Python Helper Scripts
+
+[Python Scripts for DICOM reading](PHYTHON_SCRIPTS.md)
+
 ### Models
 
 Trained models for slice detection and slice segmentation are provided in `models/`
