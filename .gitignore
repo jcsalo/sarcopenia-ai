@@ -1,6 +1,7 @@
 # sarcopenia-ai files
 data/
 archive/
+L3/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
