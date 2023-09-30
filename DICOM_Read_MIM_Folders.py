@@ -3,7 +3,7 @@ import os
 import datetime         # Used for date_time stamp in output file
 import tkinter as tk    # Library for user input dialog
 from tkinter import filedialog
-from tkinter import tkMessageBox
+from tkinter import messagebox
 import csv              # Library used to write DICOM header informationto CSV file
 import json             # Library for cURL
 import requests         # Library for cURL
@@ -11,13 +11,9 @@ import pydicom          # Library for reading DICOM files
 import shutil
 from natsort import natsorted
 
-## This script processes nesting folders of single-slice DICOM images stored in nested folders
+## This script processes a folder of L3 single-slice DICOM files stored in nested folders
 ##    DICOM files are read and metadata extracted. Files are then collected into an L3 folder
-##    Which is then ready for reading with AutoMATiCA
-
-## VERSION 2
-## 
-## names .dcm files with CT accession number
+##    Which is then read for reading with AutoMATiCA
 
 ## Input is a folder of L3 DICOMS
 ## ... which is contained within a folder with the patients name
@@ -48,8 +44,6 @@ def is_dicom_file(file_path):   # Tests whether a file path correspoinds to a va
         return False
 
 
-## Message Box describes script
-tkMessageBox.showinfo(title="Read_MIM_Folders", message="This script reads a directory of which contains daily work folders containing monthly MIM folders containing patient foolders containing single DICOM slices")
 
 
 
@@ -60,9 +54,10 @@ output_folder = choose_output_directory()
 #dicom_folder = 'E:/CancerNutrition_MIMs_E'
 #output_folder = 'E:/CancerNutrition_MIMs_E'
 
-comments='Wednesday 835pm Reading E_CancerNutrition_Mins including MIM_outliers folder with 3 addl scans'
+comments='Wednesday evening 8/16 swapping Patient ID and Accession'
 
 
+messagebox.showinfo(title="Read_MIM_Folders", message="This script reads a directory of which contains daily work folders containing monthly MIM folders containing patient foolders containing single DICOM slices")
 
 
 
@@ -71,7 +66,7 @@ l3_folder_path = os.path.join(dicom_folder, "L3")
 if not os.path.exists(l3_folder_path):
     os.makedirs(l3_folder_path)
 
-## Determine whether there is a folder "metadata" inside of the L3 folder
+## Determine whether there is a folder "metadata" inside of the LICOM
 metadata_folder_path = os.path.join(l3_folder_path, "metadata")
 if not os.path.exists(metadata_folder_path):
     os.makedirs(metadata_folder_path)
@@ -114,7 +109,7 @@ def read_monthly_folder_test(day_path):
         if os.path.isdir(month_folder_path): # Read the contents of month_folder it it is a valid directory
             for patient_folder in os.listdir(month_folder_path): # Read contents of patient_folder inside month_folder
                 patient_path = os.path.join(day_path,month_folder,patient_folder)
-                print(f"Patient Folder: {patient_path}")
+                #print(f"Patient Folder: {patient_path}")
 
 
 
@@ -175,7 +170,10 @@ def read_monthly_folder(day_path,day_folder):
                     ethnic=dicom_file.EthnicGroup
                 except AttributeError: 
                     ethnic=''
-                thickness=dicom_file.SliceThickness
+                try:
+                    thickness=dicom_file.SliceThickness
+                except AttributeError:
+                    thickness=0
                 rows=dicom_file.Rows
                 columns=dicom_file.Columns
                 pixel_spacing=dicom_file.PixelSpacing
@@ -194,14 +192,10 @@ def read_monthly_folder(day_path,day_folder):
                 dsl3 = pydicom.read_file(dicom_file_path)
                 dsl3.PatientID = accession
                 dsl3.AccessionNumber = patient_id  
-                ## Version 1: Saved as DICOM file using SOP UID 
-                ## new_l3_path = os.path.join(l3_folder_path, dicom_list[0])
-                ## --------------------------------------------------------
-                new_l3_filename = f"{accession}.dcm"
-                new_l3_path2 = os.path.join(l3_folder_path, new_l3_filename)
-                print(f"new_l3_path: {new_l3_path2}")
-                dsl3.save_as(new_l3_path2)
-                ##  Version 0: used copy function
+                new_l3_path = os.path.join(l3_folder_path, dicom_list[0])
+                #print(f"new_l3_path: {new_l3_path}")
+                dsl3.save_as(new_l3_path)
+                ##  Old script: used copy function
                 #l3_file_path = os.path.join(l3_folder_path,dicom_list[0])
                 #print(f"le_file_path: {l3_file_path}")
                 #shutil.copy2(dicom_file_path, l3_file_path)

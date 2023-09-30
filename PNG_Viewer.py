@@ -13,20 +13,15 @@ from pathlib import Path
 
 
 # This script allows viewing of the segmentation map folder output from AutoMATiCA
-
 # Overall goal is to view the segmentation maps to determine which may need to be re-read
 
 # The images in the folder are displayed serially.  Clicking the "Reject" button adds the accession number
-# to a list which would then be used to direct ImageJ to re-read DICOMS corresponding to these patients.
-
+# to a CSV which would then be used to direct ImageJ to re-read DICOMS corresponding to these patients.
 
 ## Output is a metadata files
 
 
-
 comments='Read PNG images from segmentation map'
-
-
 
 
 
@@ -50,8 +45,7 @@ def forward(img_no):
 	label.grid_forget()
 	#label.grid_remove()
 
-	# This is for clearing the screen so that
-	# our next image can pop up
+	# This is for clearing the screen so that our next image can pop up
 	#label = Label(image=List_images[img_no-1]) # Original
 	#label = Label(image='') # new - put start image here
 	png_n_path = os.path.join(png_path, png_list[img_no]) ## seeing if global variables work
