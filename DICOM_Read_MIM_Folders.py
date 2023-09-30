@@ -51,13 +51,14 @@ def is_dicom_file(file_path):   # Tests whether a file path correspoinds to a va
 dicom_folder = choose_dicom_directory()
 output_folder = choose_output_directory()
 
+## Used for Testing
 #dicom_folder = 'E:/CancerNutrition_MIMs_E'
 #output_folder = 'E:/CancerNutrition_MIMs_E'
 
 comments='Wednesday evening 8/16 swapping Patient ID and Accession'
 
 
-messagebox.showinfo(title="Read_MIM_Folders", message="This script reads a directory of which contains daily work folders containing monthly MIM folders containing patient foolders containing single DICOM slices")
+messagebox.showinfo(title="Read_MIM_Folders", message="This script reads a directory which contains daily work folders containing monthly MIM folders containing patient foolders containing single DICOM slices")
 
 
 
@@ -93,7 +94,7 @@ writer.writerow(["Patient Name","Patient ID","Birth Date","Sex","Age" ,"Height",
                  "Study Instance UID","rows","columns","pixel_spacing","Slice Z","Area","Attenuation","Slice_Prob","Workday","Monthly",dicom_folder,comments])
 ## Create dicom_errors .CSV file and write headers
 dicom_error_filename = generate_errorfile()
-dicom_error_path = os.path.join(output_folder,'L3',dicom_error_filename)
+dicom_error_path = os.path.join(output_folder,'L3','metadata',dicom_error_filename)
 ecsv_file = open(dicom_error_path, "w", newline="")
 ewriter = csv.writer(ecsv_file)
 ewriter.writerow(["Path"]) 

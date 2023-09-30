@@ -48,12 +48,12 @@ def generate_filename():
 
 if __name__ == "__main__":
     # Provide file paths and common column names
-    metadata_file_path  = fd.askopenfilename(initialdir="D:", title="Select DICOM Metadata file",filetypes=(("CSV", "*.csv"),("all files", "*.*")))
-    results_file_path = fd.askopenfilename(initialdir="D:", title="Select Results file from AutoAMTiCA", filetypes=(("EXCEL", "*.xlsx"),("all files", "*.*")))
+    metadata_file_path  = fd.askopenfilename(initialdir="E:", title="Select DICOM Metadata file",filetypes=(("CSV", "*.csv"),("all files", "*.*")))
+    results_file_path = fd.askopenfilename(initialdir="E:", title="Select Results file from AutoAMTiCA", filetypes=(("EXCEL", "*.xlsx"),("all files", "*.*")))
     metadata_common_column1 = "SOP Instance UID"  # Unique slice identifier extracted by metadata script
     results_common_column1 = "results_uid" # Unique slice identifier which had been incorporated into file name (and was captured by AutoMATiCA)
     
-    output_csv_path = fd.askdirectory(initialdir="D:", title="Location to Save Merged Metadata + Results File")
+    output_csv_path = fd.askdirectory(initialdir="E:", title="Location to Save Merged Metadata + Results File")
 
     # Call the function to perform the inner join and save the result
     perform_inner_join(metadata_file_path, results_file_path, metadata_common_column1, results_common_column1, output_csv_path)
