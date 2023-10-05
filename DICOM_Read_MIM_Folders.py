@@ -55,7 +55,7 @@ output_folder = choose_output_directory()
 #dicom_folder = 'E:/CancerNutrition_MIMs_E'
 #output_folder = 'E:/CancerNutrition_MIMs_E'
 
-comments='Wednesday evening 8/16 swapping Patient ID and Accession'
+comments='Weds evening 10/4'
 
 
 messagebox.showinfo(title="Read_MIM_Folders", message="This script reads a directory which contains daily work folders containing monthly MIM folders containing patient foolders containing single DICOM slices")
@@ -125,8 +125,11 @@ def read_monthly_folder(day_path,day_folder):
                 if patient_folder in skip_array:  # skip folders which appear on the skip list
                     continue
                 patient_path = os.path.join(day_path,month_folder,patient_folder)
-                print(f"Patient Folder: {patient_path}")
-                dicom_list = os.listdir(patient_path)
+                try:
+                    dicom_list = os.listdir(patient_path)
+                except NotADirectoryError:
+                    print(f"Skipping non-directory: {patient_path}")
+                    continue
                 dicom_file_path = os.path.join(patient_path, dicom_list[0])
                 print(f"DICOM file path: {dicom_file_path}")
                 if not is_dicom_file(dicom_file_path): # Tests file using the is_dicom_file function to verity it is valid DICOM
